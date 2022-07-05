@@ -2,7 +2,7 @@
 import { IResolvers, Executor } from '@graphql-tools/utils';
 import { GraphQLSchema, GraphQLResolveInfo, DocumentNode, SelectionSetNode } from 'graphql';
 import * as YamlConfig from './config';
-import { Transform, MergedTypeConfig } from '@graphql-tools/delegate';
+import { Transform, MergedTypeConfig, SubschemaConfig } from '@graphql-tools/delegate';
 import { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { MeshStore } from '@graphql-mesh/store';
 import configSchema from './config-schema.json';
@@ -12,11 +12,9 @@ export const jsonSchema: any = configSchema;
 
 export { YamlConfig };
 
-export type MeshSource = {
+export type MeshSource = SubschemaConfig & {
   schema: GraphQLSchema;
-  executor?: Executor;
   contextVariables?: Record<string, string>;
-  batch?: boolean;
 };
 
 type FetchFn = (input: RequestInfo, init?: RequestInit) => Promise<Response>;
